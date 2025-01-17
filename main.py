@@ -4,9 +4,6 @@ import threading
 import os
 import ctypes
 from playsound import playsound
-import sys
-
-
 
 hwnd = ctypes.windll.kernel32.GetConsoleWindow()
 NoW=False
@@ -73,7 +70,7 @@ def on_message(ws, message):
         playsound('Emergency_Alert01-1.mp3')
         NoW = False    
     elif NoW == False:
-        print("緊急警報は発令されていない  No EEW issued")
+        print("No EEW issued")
         NoW = True
 
 # Function for handling errors
@@ -117,7 +114,5 @@ for source, url in ws_urls.items():
 # Wait for all threads to complete
 for thread in threads:
     thread.join()
-
-
 
 
