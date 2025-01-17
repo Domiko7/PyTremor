@@ -1,24 +1,31 @@
 import websocket
 import json
 import threading
+import os
+import ctypes
 from playsound import playsound
+import sys
 
 
+
+hwnd = ctypes.windll.kernel32.GetConsoleWindow()
 NoW=False
 def on_message(ws, message):
     global NoW
+    global hwnd
     data = json.loads(message)
     if data.get("type") == "jma_eew":
         print("Earthquake Alert! (JAPAN EEW)")
         print(f"Title: {data.get('Title')}")
         print(f"Location: {data.get('Hypocenter')}")
-        print(f"Magnitude: {data.get('Magnitude')}, Depth: {data.get('Depth')} km")
-        print(f"Max Intensity: {data.get('MaxIntensity')}")
-        print(f"Maximum earthquake intensity: {data.get('WarnArea.Shindo1')}")
-        print(f"Orgin time: {data.get('OrginTime')}")
+        print(f"Magnitude: {data.get('Magunitude')}")
         print(f"Depth: {data.get('Depth')}")
-        print(f"Warning area arrival: {data.get('WarnArea.Arrive')}")
-        print(f"Type: {data.get('WarnArea.Type')}")
+        print(f"Max Intensity: {data.get('MaxIntensity')}")
+        print(f"Maximum shindo: {data.get('WarnArea').get('Shindo1')}")
+        print(f"Announced Time: {data.get('AnnouncedTime')}")
+        print(f"Depth: {data.get('Depth')} km")
+        print(f"Warning Area arrival: {data.get('WarnArea').get('Arrive')}")
+        print(f"Type: {data.get('WarnArea').get('Type')}")
         print(f"Warning Areas: {data.get('WarnArea').get('Chiiki')}")
         playsound('Emergency_Alert01-1.mp3')
         NoW = False
@@ -63,9 +70,10 @@ def on_message(ws, message):
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
         print(f"ReportTIme: {data.get('ReportTime')}")
         print(f"Final: {data.get('isFinal')}")
-        allEEWFunc()
+        playsound('Emergency_Alert01-1.mp3')
+        NoW = False    
     elif NoW == False:
-        print("No EEW issued")
+        print("緊急警報は発令されていない  No EEW issued")
         NoW = True
 
 # Function for handling errors
@@ -109,6 +117,7 @@ for source, url in ws_urls.items():
 # Wait for all threads to complete
 for thread in threads:
     thread.join()
+
 
 
 
