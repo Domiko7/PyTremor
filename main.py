@@ -3,6 +3,7 @@ import json
 import threading
 from playsound import playsound
 
+
 NoW=False
 def on_message(ws, message):
     global NoW
@@ -19,7 +20,8 @@ def on_message(ws, message):
         print(f"Warning area arrival: {data.get('WarnArea.Arrive')}")
         print(f"Type: {data.get('WarnArea.Type')}")
         print(f"Warning Areas: {data.get('WarnArea').get('Chiiki')}")
-        Now = False
+        playsound('Emergency_Alert01-1.mp3')
+        NoW = False
         if data.get("isFinal"):
             print("This is the final report.")
     elif data.get("type") == "cenc_eqlist":
@@ -28,8 +30,8 @@ def on_message(ws, message):
         print(f"Depth: {data.get('depth')}")
         print(f"Time: {data.get('time')}")
         print(f"Location: {data.get('location')}")
-        print(f"Maximum intensity: {data.get('intensity')}")
-        Now = False
+        playsound('Emergency_Alert01-1.mp3')
+        NoW = False
     elif data.get("type") == "cwa_eew":
         print("Earthquake Alert! (CWA EEW)")
         print(f"Magnitude: {data.get('Magunitude')}")
@@ -38,7 +40,8 @@ def on_message(ws, message):
         print(f"Time: {data.get('OrginTime')}")
         print(f"Location: {data.get('HypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
-        Now = False
+        playsound('Emergency_Alert01-1.mp3')
+        NoW = False
         print(f"ReportTIme: {data.get('ReportTime')}")
     elif data.get("type") == "sc_eew":
         print("Earthquake Alert! (SC EEW)")
@@ -48,7 +51,8 @@ def on_message(ws, message):
         print(f"Time: {data.get('OrginTime')}")
         print(f"Location: {data.get('HypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
-        Now = False
+        playsound('Emergency_Alert01-1.mp3')
+        NoW = False
     elif data.get("type") == "fj_eew":
         print("Earthquake Alert! (FJ EEW)")
         print(f"Magnitude: {data.get('Magunitude')}")
@@ -59,7 +63,7 @@ def on_message(ws, message):
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
         print(f"ReportTIme: {data.get('ReportTime')}")
         print(f"Final: {data.get('isFinal')}")
-        Now = False
+        allEEWFunc()
     elif NoW == False:
         print("No EEW issued")
         NoW = True
@@ -105,4 +109,6 @@ for source, url in ws_urls.items():
 # Wait for all threads to complete
 for thread in threads:
     thread.join()
+
+
 
