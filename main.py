@@ -5,38 +5,45 @@ import os
 import ctypes
 from playsound import playsound
 
-hwnd = ctypes.windll.kernel32.GetConsoleWindow()
 NoW=False
 def on_message(ws, message):
     global NoW
-    global hwnd
     data = json.loads(message)
     if data.get("type") == "jma_eew":
+        playsound('Strong shaking (JP).mp3')
+        if data.get("isFinal"):
+            print("THIS IS THE FINAL REPORT")
         print("Earthquake Alert! (JAPAN EEW)")
         print(f"Title: {data.get('Title')}")
         print(f"Location: {data.get('Hypocenter')}")
         print(f"Magnitude: {data.get('Magunitude')}")
-        print(f"Depth: {data.get('Depth')}")
         print(f"Max Intensity: {data.get('MaxIntensity')}")
-        print(f"Maximum shindo: {data.get('WarnArea').get('Shindo1')}")
-        print(f"Announced Time: {data.get('AnnouncedTime')}")
-        print(f"Depth: {data.get('Depth')} km")
-        print(f"Warning Area arrival: {data.get('WarnArea').get('Arrive')}")
-        print(f"Type: {data.get('WarnArea').get('Type')}")
+        print(f"Maximum earthquake intensity: {data.get('WarnArea').get('Shindo1')}")
+        print(f"Orgin time: {data.get('OriginTime')}")
+        print(f"Announced time: {data.get('AnnouncedTime')}")
+        print(f"Depth: {data.get('Depth')}")
+        print(f"Warning area arrival: {data.get('WarnArea').get('Arrive')}")
         print(f"Warning Areas: {data.get('WarnArea').get('Chiiki')}")
+        print(f"Method: {data.get('isAssumption')}")
+        playsound('Emergency_Alert02-1.mp3')
         playsound('Emergency_Alert01-1.mp3')
         NoW = False
-        if data.get("isFinal"):
-            print("This is the final report.")
+        if data.get("isCancel"):
+            for i in range(5):
+                print('FALSE EEW ALARM')
     elif data.get("type") == "cenc_eqlist":
+        playsound('Strong shaking (JP).mp3')
+        playsound('Emergency_Alert01-1.mp3')
         print("Earthquake Alert! (CENC EEW)")
-        print(f"Magnitude: {data.get('magnitude')}")
+        print(f"Magnitude: {data.get('Magunitude')}")
         print(f"Depth: {data.get('depth')}")
         print(f"Time: {data.get('time')}")
         print(f"Location: {data.get('location')}")
-        playsound('Emergency_Alert01-1.mp3')
+        playsound('Emergency_Alert02-1.mp3')
+
         NoW = False
     elif data.get("type") == "cwa_eew":
+        playsound('Strong shaking (JP).mp3')
         print("Earthquake Alert! (CWA EEW)")
         print(f"Magnitude: {data.get('Magunitude')}")
         print(f"ID: {data.get('ID')}")
@@ -45,9 +52,11 @@ def on_message(ws, message):
         print(f"Location: {data.get('HypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
         playsound('Emergency_Alert01-1.mp3')
+        playsound('Emergency_Alert02-1.mp3')
         NoW = False
         print(f"ReportTIme: {data.get('ReportTime')}")
     elif data.get("type") == "sc_eew":
+        playsound('Strong shaking (JP).mp3')
         print("Earthquake Alert! (SC EEW)")
         print(f"Magnitude: {data.get('Magunitude')}")
         print(f"ID: {data.get('ID')}")
@@ -56,8 +65,10 @@ def on_message(ws, message):
         print(f"Location: {data.get('HypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
         playsound('Emergency_Alert01-1.mp3')
+        playsound('Emergency_Alert02-1.mp3')
         NoW = False
     elif data.get("type") == "fj_eew":
+        playsound('Strong shaking (JP).mp3')
         print("Earthquake Alert! (FJ EEW)")
         print(f"Magnitude: {data.get('Magunitude')}")
         print(f"ID: {data.get('ID')}")
@@ -68,7 +79,8 @@ def on_message(ws, message):
         print(f"ReportTIme: {data.get('ReportTime')}")
         print(f"Final: {data.get('isFinal')}")
         playsound('Emergency_Alert01-1.mp3')
-        NoW = False    
+        playsound('Emergency_Alert02-1.mp3')
+        NoW = False
     elif NoW == False:
         print("No EEW issued")
         NoW = True
