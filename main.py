@@ -5,12 +5,28 @@ import os
 import ctypes
 from playsound import playsound
 
+def EEWsound(laungage):
+    if laungage == 'English':
+        playsound('sounds/Shaking(EN).mp3')
+    elif laungage == 'Japanese':
+        playsound('sounds/Shaking(JP).mp3')
+    elif laungage == 'Chinese':
+        playsound('sounds/Shaking(CH).mp3')
+    elif laungage == 'Spanish':
+        playsound('sounds/Shaking(ES).mp3')
+    elif laungage == 'Korean':
+        playsound('sounds/Shaking(SK).mp3')
+    elif laungage == 'Polish':
+        playsound('sounds/Shaking(PL).mp3')
+    playsound('sounds/Emergency_Alert02-1.mp3')
+    playsound('sounds/Emergency_Alert01-1.mp3')
+
 NoW=False
 def on_message(ws, message):
+    laungage = 'Polish'
     global NoW
     data = json.loads(message)
     if data.get("type") == "jma_eew":
-        playsound('Strong shaking (JP).mp3')
         if data.get("isFinal"):
             print("THIS IS THE FINAL REPORT")
         print("Earthquake Alert! (JAPAN EEW)")
@@ -25,25 +41,12 @@ def on_message(ws, message):
         print(f"Warning area arrival: {data.get('WarnArea').get('Arrive')}")
         print(f"Warning Areas: {data.get('WarnArea').get('Chiiki')}")
         print(f"Method: {data.get('isAssumption')}")
-        playsound('Emergency_Alert02-1.mp3')
-        playsound('Emergency_Alert01-1.mp3')
+        EEWsound(laungage)
         NoW = False
         if data.get("isCancel"):
             for i in range(5):
                 print('FALSE EEW ALARM')
-    elif data.get("type") == "cenc_eqlist":
-        playsound('Strong shaking (JP).mp3')
-        playsound('Emergency_Alert01-1.mp3')
-        print("Earthquake Alert! (CENC EEW)")
-        print(f"Magnitude: {data.get('Magunitude')}")
-        print(f"Depth: {data.get('depth')}")
-        print(f"Time: {data.get('time')}")
-        print(f"Location: {data.get('location')}")
-        playsound('Emergency_Alert02-1.mp3')
-
-        NoW = False
     elif data.get("type") == "cwa_eew":
-        playsound('Strong shaking (JP).mp3')
         print("Earthquake Alert! (CWA EEW)")
         print(f"Magnitude: {data.get('Magunitude')}")
         print(f"ID: {data.get('ID')}")
@@ -51,12 +54,10 @@ def on_message(ws, message):
         print(f"Time: {data.get('OrginTime')}")
         print(f"Location: {data.get('HypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
-        playsound('Emergency_Alert01-1.mp3')
-        playsound('Emergency_Alert02-1.mp3')
+        EEWsound(laungage)
         NoW = False
         print(f"ReportTIme: {data.get('ReportTime')}")
     elif data.get("type") == "sc_eew":
-        playsound('Strong shaking (JP).mp3')
         print("Earthquake Alert! (SC EEW)")
         print(f"Magnitude: {data.get('Magunitude')}")
         print(f"ID: {data.get('ID')}")
@@ -64,11 +65,9 @@ def on_message(ws, message):
         print(f"Time: {data.get('OrginTime')}")
         print(f"Location: {data.get('HypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
-        playsound('Emergency_Alert01-1.mp3')
-        playsound('Emergency_Alert02-1.mp3')
+        EEWsound(laungage)
         NoW = False
     elif data.get("type") == "fj_eew":
-        playsound('Strong shaking (JP).mp3')
         print("Earthquake Alert! (FJ EEW)")
         print(f"Magnitude: {data.get('Magunitude')}")
         print(f"ID: {data.get('ID')}")
@@ -78,8 +77,15 @@ def on_message(ws, message):
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
         print(f"ReportTIme: {data.get('ReportTime')}")
         print(f"Final: {data.get('isFinal')}")
-        playsound('Emergency_Alert01-1.mp3')
-        playsound('Emergency_Alert02-1.mp3')
+        EEWsound(laungage)
+        NoW = False
+    elif data.get("type") == "cenc_eqlist":
+        print("Earthquake Alert! (CENC EQLIST)")
+        print(f"Magnitude: {data.get('Magunitude')}")
+        print(f"Depth: {data.get('Depth')}")
+        print(f"Time: {data.get('Time')}")
+        print(f"Location: {data.get('Location')}")
+        EEWsound(laungage)
         NoW = False
     elif NoW == False:
         print("No EEW issued")
@@ -126,5 +132,4 @@ for source, url in ws_urls.items():
 # Wait for all threads to complete
 for thread in threads:
     thread.join()
-
 
