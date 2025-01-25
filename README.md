@@ -1,6 +1,7 @@
 
 # SesnaQuake (塞斯纳地震)
 ### Please keep in mind the app currently has NO UI and it works in terminal since it's very early developemnt.
+### Currently only JMA EEW works properly other ones show the EEW but without info 
 SesnaQuake 是一个原型地震预警 (EEW) 监测工具，通过 WebSocket 连接监听各种实时 EEW 数据源。它为包括日本、中国及亚洲其他地区在内的多个地区提供详细的地震警报。
 
 这是一个处于早期阶段的项目，目前尚未准备好投入生产。我们非常欢迎反馈和贡献，以改进系统。
