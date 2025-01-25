@@ -1,8 +1,3 @@
-import websocket
-import json
-import threading
-import os
-import ctypes
 from playsound import playsound
 from plyer import notification
 
@@ -21,12 +16,12 @@ def EEWsound(laungage, country):
         playsound('sounds/Shaking(PL).mp3')
     playsound('sounds/Emergency_Alert02-1.mp3')
     playsound('sounds/Emergency_Alert01-1.mp3')
-    notification.notify(
-        title="EARTHQUAKE ALERT! ({county} EEW)",
-        message="drop cover and hold on",
-        app_icon=None,  # Path to a custom icon file (.ico). Set to None for no icon.
-        timeout=10  # Duration in seconds
-    )
+    #notification.notify(
+        #title="EARTHQUAKE ALERT!",
+        #message="drop cover and hold on",
+        #app_icon=None,  # Path to a custom icon file (.ico). Set to None for no icon.
+        #timeout=10  # Duration in seconds
+    #)
 
 NoW=False
 def on_message(ws, message):
@@ -49,7 +44,7 @@ def on_message(ws, message):
         print(f"Warning area arrival: {data.get('WarnArea').get('Arrive')}")
         print(f"Warning Areas: {data.get('WarnArea').get('Chiiki')}")
         print(f"Method: {data.get('isAssumption')}")
-        EEWsound(laungage, 'Japan')
+        EEWsound(laungage)
         NoW = False
         if data.get("isCancel"):
             for i in range(5):
@@ -62,7 +57,7 @@ def on_message(ws, message):
         print(f"Time: {data.get('OrginTime')}")
         print(f"Location: {data.get('HypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
-        EEWsound(laungage, 'China')
+        EEWsound(laungage)
         NoW = False
         print(f"ReportTIme: {data.get('ReportTime')}")
     elif data.get("type") == "sc_eew":
@@ -73,7 +68,7 @@ def on_message(ws, message):
         print(f"Time: {data.get('OrginTime')}")
         print(f"Location: {data.get('hypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
-        EEWsound(laungage, 'China')
+        EEWsound(laungage)
         NoW = False
     elif data.get("type") == "fj_eew":
         print("Earthquake Alert! (FJ EEW)")
@@ -85,7 +80,7 @@ def on_message(ws, message):
         print(f"Maximum intensity: {data.get('maxIntensity')}")
         print(f"ReportTIme: {data.get('ReportTime')}")
         print(f"Final: {data.get('isFinal')}")
-        EEWsound(laungage, 'China')
+        EEWsound(laungage)
         NoW = False
     elif data.get("type") == "cenc_eqlist":
         print("Earthquake Alert! (CENC EQLIST)")
@@ -96,7 +91,7 @@ def on_message(ws, message):
                 print(f"Depth: {report.get('depth')}")
                 print(f"Time: {report.get('time')}")
                 print(f"Location: {report.get('location')}")
-                EEWsound(laungage, 'China')
+                EEWsound(laungage)
                 NoW = False
     elif NoW == False:
         print("No EEW issued")
@@ -149,3 +144,4 @@ for source, url in ws_urls.items():
 # Wait for all threads to complete
 for thread in threads:
     thread.join()
+
