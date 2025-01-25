@@ -8,11 +8,11 @@ SesnaQuake 是一个原型地震预警 (EEW) 监测工具，通过 WebSocket 连
 
 功能
 多区域支持：接收以下地区的地震预警：
-日本气象厅 (JMA EEW)
-中国地震台网中心 (CENC EEW)
-中国地震局 (CWA EEW)
-四川地震预警系统 (SC EEW)
-福建地震预警系统 (FJ EEW)
+- 日本气象厅 (JMA EEW)
+- 中国地震台网中心 (CENC EEW)
+- 中国地震局 (CWA EEW)
+- 四川地震预警系统 (SC EEW)
+- 福建地震预警系统 (FJ EEW)
 实时警报：显示详细信息，如震级、深度、位置、最大震感强度等。
 
 ### Japanese:
@@ -26,11 +26,11 @@ SesnaQuakeは、WebSocket接続を使用してさまざまなリアルタイム�
 
 機能
 複数地域対応: 以下のEEWアラートを受信します:
-日本気象庁（JMA EEW）
-中国地震ネットワークセンター（CENC EEW）
-中国地震局（CWA EEW）
-四川省地震早期警戒（SC EEW）
-福建省地震早期警戒（FJ EEW）
+- 日本気象庁（JMA EEW）
+- 中国地震ネットワークセンター（CENC EEW）
+- 中国地震局（CWA EEW）
+- 四川省地震早期警戒（SC EEW）
+- 福建省地震早期警戒（FJ EEW）
 リアルタイムアラート:
 震源の位置、深さ、マグニチュード、最大震度など、詳細な情報を表示します。
 
@@ -44,9 +44,9 @@ This is an early-stage project and is not yet production-ready. Feedback and con
 Features
 Multi-Region Support: Receives EEW alerts from:
 
-Japan Meteorological Agency (JMA EEW)
-China Earthquake Networks Center (CENC EEW)
-China Earthquake Administration (CWA EEW)
-Sichuan EEW (SC EEW)
-Fujian EEW (FJ EEW)
+- Japan Meteorological Agency (JMA EEW)
+- China Earthquake Networks Center (CENC EEW)
+- China Earthquake Administration (CWA EEW)
+- Sichuan EEW (SC EEW)
+- Fujian EEW (FJ EEW)
 Real-Time Alerts: Displays detailed information such as magnitude, depth, location, maximum intensity, and more.
