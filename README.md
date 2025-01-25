@@ -13,7 +13,7 @@ SesnaQuake 是一个原型地震预警 (EEW) 监测工具，通过 WebSocket 连
 福建地震预警系统 (FJ EEW)
 实时警报：显示详细信息，如震级、深度、位置、最大震感强度等。
 
-Japanese:
+### Japanese:
 SesnaQuakeは、WebSocket接続を使用してさまざまなリアルタイムの地震早期警戒（EEW）データソースを監視するプロトタイプのツールです。日本、中国、アジアの他の地域を含む複数の地域の詳細な地震警報を提供します。
 
 これは初期段階のプロジェクトであり、まだ本番環境には対応していません。システム改善のためにフィードバックや貢献を強く推奨します。
@@ -28,7 +28,7 @@ SesnaQuakeは、WebSocket接続を使用してさまざまなリアルタイム�
 リアルタイムアラート:
 震源の位置、深さ、マグニチュード、最大震度など、詳細な情報を表示します。
 
-English (orginal):
+### English (orginal):
 
 SesnaQuake is a prototype Earthquake Early Warning (EEW) monitoring tool that listens to various real-time EEW data sources using WebSocket connections. It provides detailed earthquake alerts for multiple regions, including Japan, China, and other parts of Asia.
 
