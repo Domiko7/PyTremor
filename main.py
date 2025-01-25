@@ -23,7 +23,7 @@ def EEWsound(laungage):
 
 NoW=False
 def on_message(ws, message):
-    laungage = 'Polish'
+    laungage = 'Chinese'
     global NoW
     data = json.loads(message)
     if data.get("type") == "jma_eew":
@@ -79,14 +79,6 @@ def on_message(ws, message):
         print(f"Final: {data.get('isFinal')}")
         EEWsound(laungage)
         NoW = False
-    elif data.get("type") == "cenc_eqlist":
-        print("Earthquake Alert! (CENC EQLIST)")
-        print(f"Magnitude: {data.get('Magunitude')}")
-        print(f"Depth: {data.get('Depth')}")
-        print(f"Time: {data.get('Time')}")
-        print(f"Location: {data.get('Location')}")
-        EEWsound(laungage)
-        NoW = False
     elif NoW == False:
         print("No EEW issued")
         NoW = True
@@ -116,7 +108,6 @@ def run_websocket(ws_url):
 # Dictionary to map the different data sources to their respective WebSocket URLs
 ws_urls = {
     "jma_eew": "wss://ws-api.wolfx.jp/jma_eew",
-    "cenc_eqlist": "wss://ws-api.wolfx.jp/cenc_eqlist",
     "cwa_eew": "wss://ws-api.wolfx.jp/cwa_eew",
     "sc_eew": "wss://ws-api.wolfx.jp/sc_eew",
     "fj_eew": "wss://ws-api.wolfx.jp/fj_eew"
@@ -132,4 +123,3 @@ for source, url in ws_urls.items():
 # Wait for all threads to complete
 for thread in threads:
     thread.join()
-
