@@ -23,7 +23,7 @@ def EEWsound(laungage, country):
     playsound('sounds/Emergency_Alert01-1.mp3')
     notification.notify(
         title="EARTHQUAKE ALERT! ({county} EEW)",
-        message=" ",
+        message="drop cover and hold on",
         app_icon=None,  # Path to a custom icon file (.ico). Set to None for no icon.
         timeout=10  # Duration in seconds
     )
