@@ -7,12 +7,6 @@ from playsound import playsound
 from plyer import notification
 
 def EEWsound(laungage, country):
-    notification.notify(
-        title="EARTHQUAKE ALERT! ({county} EEW)",
-        message=" ",
-        app_icon=None,  # Path to a custom icon file (.ico). Set to None for no icon.
-        timeout=10  # Duration in seconds
-    )
     if laungage == 'English':
         playsound('sounds/Shaking(EN).mp3')
     elif laungage == 'Japanese':
@@ -27,6 +21,12 @@ def EEWsound(laungage, country):
         playsound('sounds/Shaking(PL).mp3')
     playsound('sounds/Emergency_Alert02-1.mp3')
     playsound('sounds/Emergency_Alert01-1.mp3')
+    notification.notify(
+        title="EARTHQUAKE ALERT! ({county} EEW)",
+        message=" ",
+        app_icon=None,  # Path to a custom icon file (.ico). Set to None for no icon.
+        timeout=10  # Duration in seconds
+    )
 
 NoW=False
 def on_message(ws, message):
