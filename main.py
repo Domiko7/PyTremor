@@ -4,8 +4,15 @@ import threading
 import os
 import ctypes
 from playsound import playsound
+from plyer import notification
 
-def EEWsound(laungage):
+def EEWsound(laungage, country):
+    notification.notify(
+        title="EARTHQUAKE ALERT! ({county} EEW)",
+        message=" ",
+        app_icon=None,  # Path to a custom icon file (.ico). Set to None for no icon.
+        timeout=10  # Duration in seconds
+    )
     if laungage == 'English':
         playsound('sounds/Shaking(EN).mp3')
     elif laungage == 'Japanese':
@@ -23,8 +30,9 @@ def EEWsound(laungage):
 
 NoW=False
 def on_message(ws, message):
-    laungage = 'Chinese'
+    global toaster
     global NoW
+    laungage = 'Chinese'
     data = json.loads(message)
     if data.get("type") == "jma_eew":
         if data.get("isFinal"):
@@ -41,7 +49,7 @@ def on_message(ws, message):
         print(f"Warning area arrival: {data.get('WarnArea').get('Arrive')}")
         print(f"Warning Areas: {data.get('WarnArea').get('Chiiki')}")
         print(f"Method: {data.get('isAssumption')}")
-        EEWsound(laungage)
+        EEWsound(laungage, 'Japan')
         NoW = False
         if data.get("isCancel"):
             for i in range(5):
@@ -54,7 +62,7 @@ def on_message(ws, message):
         print(f"Time: {data.get('OrginTime')}")
         print(f"Location: {data.get('HypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
-        EEWsound(laungage)
+        EEWsound(laungage, 'China')
         NoW = False
         print(f"ReportTIme: {data.get('ReportTime')}")
     elif data.get("type") == "sc_eew":
@@ -65,7 +73,7 @@ def on_message(ws, message):
         print(f"Time: {data.get('OrginTime')}")
         print(f"Location: {data.get('hypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
-        EEWsound(laungage)
+        EEWsound(laungage, 'China')
         NoW = False
     elif data.get("type") == "fj_eew":
         print("Earthquake Alert! (FJ EEW)")
@@ -77,18 +85,27 @@ def on_message(ws, message):
         print(f"Maximum intensity: {data.get('maxIntensity')}")
         print(f"ReportTIme: {data.get('ReportTime')}")
         print(f"Final: {data.get('isFinal')}")
-        EEWsound(laungage)
+        EEWsound(laungage, 'China')
         NoW = False
     elif data.get("type") == "cenc_eqlist":
         print("Earthquake Alert! (CENC EQLIST)")
-        print(f"Magnitude: {data.get('magnitude')}")
-        print(f"Depth: {data.get('depth')}")
-        print(f"Time: {data.get('time')}")
-        print(f"Location: {data.get('location')}")
-        EEWsound(laungage)
-        NoW = False
+        for key, report in data.items():
+            if key.startswith('No'):  
+                print(f"Earthquake Report {key}:")
+                print(f"Magnitude: {report.get('magnitude')}")
+                print(f"Depth: {report.get('depth')}")
+                print(f"Time: {report.get('time')}")
+                print(f"Location: {report.get('location')}")
+                EEWsound(laungage, 'China')
+                NoW = False
     elif NoW == False:
         print("No EEW issued")
+        notification.notify(
+        title="NO EEW ISSUED",
+        message=" ",
+        app_icon=None,  # Path to a custom icon file (.ico). Set to None for no icon.
+        timeout=10  # Duration in seconds
+        )
         NoW = True
 
 # Function for handling errors
