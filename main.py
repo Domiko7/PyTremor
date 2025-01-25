@@ -63,7 +63,7 @@ def on_message(ws, message):
         print(f"ID: {data.get('ID')}")
         print(f"Depth: {data.get('Depth')}")
         print(f"Time: {data.get('OrginTime')}")
-        print(f"Location: {data.get('HypoCenter')}")
+        print(f"Location: {data.get('hypoCenter')}")
         print(f"Maximum intensity: {data.get('MaxIntensity')}")
         EEWsound(laungage)
         NoW = False
@@ -74,17 +74,17 @@ def on_message(ws, message):
         print(f"Depth: {data.get('Depth')}")
         print(f"Time: {data.get('OrginTime')}")
         print(f"Location: {data.get('HypoCenter')}")
-        print(f"Maximum intensity: {data.get('MaxIntensity')}")
+        print(f"Maximum intensity: {data.get('maxIntensity')}")
         print(f"ReportTIme: {data.get('ReportTime')}")
         print(f"Final: {data.get('isFinal')}")
         EEWsound(laungage)
         NoW = False
     elif data.get("type") == "cenc_eqlist":
         print("Earthquake Alert! (CENC EQLIST)")
-        print(f"Magnitude: {data.get('Magunitude')}")
-        print(f"Depth: {data.get('Depth')}")
-        print(f"Time: {data.get('Time')}")
-        print(f"Location: {data.get('Location')}")
+        print(f"Magnitude: {data.get('magnitude')}")
+        print(f"Depth: {data.get('depth')}")
+        print(f"Time: {data.get('time')}")
+        print(f"Location: {data.get('location')}")
         EEWsound(laungage)
         NoW = False
     elif NoW == False:
