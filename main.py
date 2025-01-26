@@ -20,13 +20,13 @@ def EEWsound(laungage):
     elif laungage == 'Polish':
         playsound('sounds/Shaking(PL).mp3')
     playsound('sounds/Emergency_Alert02-1.mp3')
-    playsound('sounds/Emergency_Alert01-1.mp3')
-    #notification.notify(
-        #title="EARTHQUAKE ALERT!",
-        #message="drop cover and hold on",
-        #app_icon=None,  # Path to a custom icon file (.ico). Set to None for no icon.
-        #timeout=10  # Duration in seconds
-    #)
+    #playsound('sounds/Emergency_Alert01-1.mp3')
+    notification.notify(
+        title="EARTHQUAKE ALERT!",
+        message="drop cover and hold on",
+        app_icon='images/drop.ico',  # Path to a custom icon file (.ico). Set to None for no icon.
+        timeout=5  # Duration in seconds
+    )
 
 NoW=False
 def on_message(ws, message):
@@ -103,8 +103,8 @@ def on_message(ws, message):
         notification.notify(
         title="NO EEW ISSUED",
         message=" ",
-        app_icon=None,  # Path to a custom icon file (.ico). Set to None for no icon.
-        timeout=10  # Duration in seconds
+        app_icon='images/Sesnaquake3.ico',  # Path to a custom icon file (.ico). Set to None for no icon.
+        timeout=2  # Duration in seconds
         )
         NoW = True
 
