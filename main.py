@@ -1,7 +1,12 @@
+import websocket
+import json
+import threading
+import os
+import ctypes
 from playsound import playsound
 from plyer import notification
 
-def EEWsound(laungage, country):
+def EEWsound(laungage):
     if laungage == 'English':
         playsound('sounds/Shaking(EN).mp3')
     elif laungage == 'Japanese':
@@ -144,4 +149,3 @@ for source, url in ws_urls.items():
 # Wait for all threads to complete
 for thread in threads:
     thread.join()
-
