@@ -5,7 +5,10 @@ import os
 import ctypes
 from playsound import playsound
 from plyer import notification
+import json
+import logging
 NoW = False
+language = 'Chinese'
 
 def EEWsound(language):
     if language == 'English':
@@ -20,7 +23,7 @@ def EEWsound(language):
         playsound('sounds/Shaking(SK).mp3')
     elif language == 'Polish':
         playsound('sounds/Shaking(PL).mp3')
-    playsound('sounds/Emergency_Alert02-1.mp3')
+    #playsound('sounds/Emergency_Alert02-1.mp3')
     #playsound('sounds/Emergency_Alert01-1.mp3')
     notification.notify(
         title="EARTHQUAKE ALERT!",
@@ -107,7 +110,7 @@ class cencEqList:
         self.language = language
     def displayAlert(self):
         print("Earthquake Alert! (CENC EQLIST)")
-        for key, report in self.ata.items():
+        for key, report in self.data.items():
             if key.startswith('No'):  
                 print(f"Earthquake Report {key}:")
                 print(f"Magnitude: {self.report.get('magnitude')}")
@@ -128,11 +131,21 @@ class noEEW:
         app_icon='images/Sesnaquake3.ico',  # Path to a custom icon file (.ico). Set to None for no icon.
         timeout=2  # Duration in seconds
         )
+
+def simulateMessage(message, language):
+    messageProcessing = False
+    global EEWsound
+    if messageProcessing:  
+        return
+    messageProcessing = True  
+    EEWsound(language)
+    on_message(None, json.dumps(message))  
+        
+    messageProcessing = False  
         
 
 def on_message(ws, message):
     global NoW
-    language = 'Chinese'
     data = json.loads(message)
     if data.get("type") == "jma_eew":
         alert = jmaEEW(data, language)
@@ -196,6 +209,21 @@ for source, url in ws_urls.items():
     thread = threading.Thread(target=run_websocket, args=(url,))
     threads.append(thread)
     thread.start()
+
+# IF YOU WANT TO SIMULATE AN EEW USE THIS 
+testMessage = {
+
+  "type": "cwa_eew",
+  "Magunitude": 7.8,
+  "ID": "CWA2025-01-27-001",
+  "Depth": "600 km",
+  "OrginTime": "2025-01-27T08:45:00Z",
+  "HypoCenter": "Pacific Ocean",
+  "MaxIntensity": "7.0",
+  "language": "English"
+}
+
+#simulateMessage(testMessage, language)
 
 # Wait for all threads to complete
 for thread in threads:
