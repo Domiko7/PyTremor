@@ -2,4 +2,4 @@ websocket-client
 playsound
 plyer
 pyttsx3
-PyQt5
+PyQt6
