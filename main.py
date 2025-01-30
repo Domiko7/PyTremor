@@ -10,7 +10,7 @@ import logging
 #from PyQt5 import QtWidgets
 #from PyQt5.QtWidgets import QApplication, QMainWindow
 NoW = False
-language = 'JP'
+language = 'CH'
 # You can choose CH EN ES JP PL SK
 def EEWsound(language):
     try:
