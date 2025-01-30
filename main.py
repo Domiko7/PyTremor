@@ -7,22 +7,16 @@ from playsound import playsound
 from plyer import notification
 import json
 import logging
+#from PyQt5 import QtWidgets
+#from PyQt5.QtWidgets import QApplication, QMainWindow
 NoW = False
-language = 'Chinese'
-
+language = 'CH'
+# You can choose CH EN ES JP PL SK
 def EEWsound(language):
-    if language == 'English':
-        playsound('sounds/Shaking(EN).mp3')
-    elif language == 'Japanese':
-        playsound('sounds/Shaking(JP).mp3')
-    elif language == 'Chinese':
-        playsound('sounds/Shaking(CH).mp3')
-    elif language == 'Spanish':
-        playsound('sounds/Shaking(ES).mp3')
-    elif language == 'Korean':
-        playsound('sounds/Shaking(SK).mp3')
-    elif language == 'Polish':
-        playsound('sounds/Shaking(PL).mp3')
+    try:
+        playsound(f'sounds/Shaking({language}).mp3')
+    except Exception as e:
+        print(f"Error playing sound: {e}")
     #playsound('sounds/Emergency_Alert02-1.mp3')
     #playsound('sounds/Emergency_Alert01-1.mp3')
     notification.notify(
@@ -228,3 +222,4 @@ testMessage = {
 # Wait for all threads to complete
 for thread in threads:
     thread.join()
+
