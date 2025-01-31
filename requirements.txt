@@ -1,4 +1,5 @@
 websocket-client
+websockets
 playsound
 plyer
 pyttsx3
