@@ -1,5 +1,5 @@
 ### English (orginal):
-# Sesnaquake
+# PyQuake
 ### Please keep in mind the app currently has NO UI and it works in terminal since it's very early developemnt.
 ### Currently only JMA EEW works properly other ones show the EEW but without info 
 SesnaQuake is a prototype Earthquake Early Warning (EEW) monitoring tool that listens to various real-time EEW data sources using WebSocket connections. It provides detailed earthquake alerts for multiple regions, including Japan, China, and other parts of Asia.
@@ -17,7 +17,7 @@ Real-Time Alerts: Displays detailed information such as magnitude, depth, locati
 ### Our discord server: https://discord.gg/V6BXY9A6vv
 
 ### Japanese:
-# SesnaQuake (セスナクエイク)
+# PyQuake (セスナクエイク)
 
 ### 現在、アプリにはUIがなく、非常に初期の開発段階であるため、ターミナルでのみ動作します。
 ### 現在、JMA EEWのみが正常に動作し、他のものはEEWを表示しますが、情報は表示されません。
@@ -35,7 +35,7 @@ SesnaQuakeは、WebSocket接続を使用してさまざまなリアルタイム�
 リアルタイムアラート:
 震源の位置、深さ、マグニチュード、最大震度など、詳細な情報を表示します。
 
-# SesnaQuake (塞斯纳地震)
+# PyQuake (塞斯纳地震)
 ### 请注意，该应用程序目前没有UI，且仅在终端中运行，因为它仍处于早期开发阶段。
 ### 目前只有JMA EEW可以正常工作，其他的EEW会显示警报，但没有信息。
 SesnaQuake 是一个原型地震预警 (EEW) 监测工具，通过 WebSocket 连接监听各种实时 EEW 数据源。它为包括日本、中国及亚洲其他地区在内的多个地区提供详细的地震警报。
