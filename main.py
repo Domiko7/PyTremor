@@ -3,7 +3,6 @@ import json
 import threading
 import os
 import ctypes
-from playsound import playsound
 from plyer import notification
 import json
 import logging
@@ -12,13 +11,12 @@ import logging
 NoW = False
 language = 'CH'
 # You can choose CH EN ES JP PL SK
+
 def EEWsound(language):
     try:
         playsound(f'sounds/Shaking({language}).mp3')
     except Exception as e:
         print(f"Error playing sound: {e}")
-    #playsound('sounds/Emergency_Alert02-1.mp3')
-    #playsound('sounds/Emergency_Alert01-1.mp3')
     notification.notify(
         title="EARTHQUAKE ALERT!",
         message="drop cover and hold on",
@@ -222,4 +220,3 @@ testMessage = {
 # Wait for all threads to complete
 for thread in threads:
     thread.join()
-
