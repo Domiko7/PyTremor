@@ -6,8 +6,6 @@ import ctypes
 from plyer import notification
 import json
 import logging
-#from PyQt5 import QtWidgets
-#from PyQt5.QtWidgets import QApplication, QMainWindow
 NoW = False
 language = 'CH'
 # You can choose CH EN ES JP PL SK
@@ -37,13 +35,14 @@ class jmaEEW:
         print(f"Location: {self.data.get('Hypocenter')}")
         print(f"Magnitude: {self.data.get('Magunitude')}")
         print(f"Max Intensity: {self.data.get('MaxIntensity')}")
-        print(f"Maximum earthquake intensity: {self.data.get('WarnArea').get('Shindo1')}")
         print(f"Origin time: {self.data.get('OriginTime')}")
         print(f"Announced time: {self.data.get('AnnouncedTime')}")
         print(f"Depth: {self.data.get('Depth')}")
-        print(f"Warning area arrival: {self.data.get('WarnArea').get('Arrive')}")
-        print(f"Warning Areas: {self.data.get('WarnArea').get('Chiiki')}")
         print(f"Method: {self.data.get('isAssumption')}")
+        print("Earthquake early warning issued for the following regions: ")
+        if self.data.get('WarnArea'):
+            for region in data.get('WarnArea'):
+                print(f"{region[Chiiki]}: {region[Shindo1]} shindo")
         if self.data.get("isCancel"):
             for i in range(5):
                 print('FALSE EEW ALARM')
@@ -71,10 +70,10 @@ class scEEW:
     def displayAlert(self):
         print("Earthquake Alert! (SC EEW)")
         print(f"Magnitude: {self.data.get('Magunitude')}")
-        print(f"ID: {self.data.get('ID')}")
-        print(f"Depth: {self.data.get('Depth')}")
+        print(f"ID: {self.data.get('EventID')}")
+        print(f"Depth: unknown")
         print(f"Time: {self.data.get('OrginTime')}")
-        print(f"Location: {self.data.get('hypoCenter')}")
+        print(f"Location: {self.data.get('HypoCenter')}")
         print(f"Maximum intensity: {self.data.get('MaxIntensity')}")
         EEWsound(self.language)
 
@@ -86,13 +85,9 @@ class fjEEW:
     def displayAlert(self):
         print("Earthquake Alert! (FJ EEW)")
         print(f"Magnitude: {self.data.get('Magunitude')}")
-        print(f"ID: {self.data.get('ID')}")
-        print(f"Depth: {self.data.get('Depth')}")
+        print(f"ID: {self.data.get('EventID')}")
         print(f"Time: {self.data.get('OrginTime')}")
         print(f"Location: {self.data.get('HypoCenter')}")
-        print(f"Maximum intensity: {self.data.get('maxIntensity')}")
-        print(f"ReportTIme: {self.data.get('ReportTime')}")
-        print(f"Final: {self.data.get('isFinal')}")
         EEWsound(self.language)
 
 class cencEqList:
@@ -101,16 +96,17 @@ class cencEqList:
         self.data = data
         self.language = language
     def displayAlert(self):
-        print("Earthquake Alert! (CENC EQLIST)")
-        for key, report in self.data.items():
-            if key.startswith('No'):  
-                print(f"Earthquake Report {key}:")
-                print(f"Magnitude: {self.report.get('magnitude')}")
-                print(f"Depth: {self.report.get('depth')}")
-                print(f"Time: {self.report.get('time')}")
-                print(f"Location: {self.report.get('location')}")
-                EEWsound(self.language)
-                NoW = False
+        firstQuake = self.data.get('No1')
+        print("Earthquake report (CENC EQLIST)")
+        print(f"Time: {firstQuake[time]}")
+        print(f"ID: {firstQuake[EventID]}")
+        print(f"Location: {firstQuake[location]}")
+        print(f"Magnitude: {firstQuake[magnitude]}")
+        print(f"Depth: {firstQuake[depth]}")
+        print(f"Intensity: {firstQuake[intensity]}")
+        
+        
+        
 class noEEW:
     global EEWsound
     def __init__(self):
